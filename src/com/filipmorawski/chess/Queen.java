@@ -25,18 +25,27 @@ public class Queen extends Figure {
 	@Override
 	void setPossibleMoves() {
 		this.possibleMoves.clear();
+		this.range.clear();
 		
 //      Queen movements is a sum of Courier and Tower moves - so I create objects of Tower and Courier 
 //		with as same as Queen position parameter, and they pass to Queen theirs possible moves 
 		
 		ArrayList<String> towerPossibleMoves = new ArrayList<String>();
 		ArrayList<String> courierPossibleMoves = new ArrayList<String>();
+		ArrayList<String> towerRange = new ArrayList<String>();
+		ArrayList<String> courierRange = new ArrayList<String>();
+		
 		
 		towerPossibleMoves = new Tower(this.name, this.color, this.position, this.verticalID, this.horizontalID).getPossibleMoves();
 		courierPossibleMoves = new Courier(this.name, this.color, this.position, this.verticalID, this.horizontalID).getPossibleMoves();
+		towerRange = new Tower(this.name, this.color, this.position, this.verticalID, this.horizontalID).getPossibleMoves();
+		courierRange = new Courier(this.name, this.color, this.position, this.verticalID, this.horizontalID).getPossibleMoves();
 
 		this.possibleMoves.addAll(towerPossibleMoves);
 		this.possibleMoves.addAll(courierPossibleMoves);
+		
+		this.range.addAll(towerRange);
+		this.range.addAll(courierRange);
 		
 	}
 

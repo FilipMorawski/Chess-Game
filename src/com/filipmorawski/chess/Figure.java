@@ -20,6 +20,7 @@ public abstract class Figure {
 	String name;
 	Icon icon;
 	ArrayList<String> possibleMoves = new ArrayList<String>();
+	ArrayList<String> range = new ArrayList<String>();
 	
 	abstract void setPossibleMoves();
 	

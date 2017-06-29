@@ -16,7 +16,7 @@ public class GameBoard extends JFrame{
 		this.add(new VerticalPanel(), BorderLayout.WEST);
 		this.add(new HorizontalPanel(), BorderLayout.NORTH);
 		this.add(new HorizontalPanel(), BorderLayout.SOUTH);
-		this.setResizable(false);
+		this.setResizable(true);
 		this.setVisible(true);
 	}
 

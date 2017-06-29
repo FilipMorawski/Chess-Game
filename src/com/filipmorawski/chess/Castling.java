@@ -23,18 +23,22 @@ public class Castling extends JOptionPane {
 	}
 	
 	private void check(Figure chosenFigure, FieldButton chosenButton) {
-
+		
 //Shorts Castlings
-			if (chosenFigure.getName().equals("King") && chosenFigure.moves == 0) {
+			if (chosenFigure.getName().equals("King") && chosenFigure.moves == 0 && !CheckMate.check) {
 				if (chosenFigure.getColor() == 1 && chosenButton.getButtonTitle().equals("g1") && chosenFigure.getPosition().equals("e1")) {
 					for (Figure figure : Figures.figures) {
 						if (figure.getPosition().equals("h1") && figure.getName().equals("Tower") && figure.getColor() == 1 && figure.moves == 0) {
 							if (!Figures.figuresPositionMap.contains("f1") && !Figures.figuresPositionMap.contains("g1")) {
+								chosenFigure.possibleMoves.add("g1");
 								setCastling(true);
-								showDialog();
-								if (doThis) {
-									moveShortWhiteTower();
+								if (WhoseTurn.whiteTurn) {
+									showDialog();
+									if (doThis) {
+										moveShortWhiteTower();
+									}
 								}
+								
 							}
 						} 
 						if (figure.getPosition().equals("h1") && figure.getName().equals("Tower") && figure.getColor() == 1 && figure.moves != 0) {
@@ -42,15 +46,18 @@ public class Castling extends JOptionPane {
 						}
 					}
 				}
-				if (chosenFigure.getColor() == 2 && chosenButton.getButtonTitle().equals("g8")) {
+				if (chosenFigure.getColor() == 2 && chosenButton.getButtonTitle().equals("g8") && chosenFigure.getPosition().equals("e8")) {
 					ArrayList<Figure> temporaryFigures = new ArrayList<Figure>(Figures.figures);
 					for (Figure figure : temporaryFigures) {
 						if (figure.getPosition().equals("h8") && figure.getName().equals("Tower") && figure.getColor() == 2 && figure.moves == 0) {
 							if (!Figures.figuresPositionMap.contains("f8") && !Figures.figuresPositionMap.contains("g8")) {
+								chosenFigure.possibleMoves.add("g8");
 								setCastling(true);
-								showDialog();
-								if (doThis) {
-									moveShortBlackTower();
+								if (WhoseTurn.blackTurn) {
+									showDialog();
+									if (doThis) {
+										moveShortBlackTower();
+									}
 								}
 							}
 						}
@@ -62,16 +69,19 @@ public class Castling extends JOptionPane {
 			}
 			
 //Long Castlings
-			if (chosenFigure.getName().equals("King") && chosenFigure.moves == 0) {
+			if (chosenFigure.getName().equals("King") && chosenFigure.moves == 0 && !CheckMate.check) {
 				if (chosenFigure.getColor() == 1 && chosenButton.getButtonTitle().equals("c1") && chosenFigure.getPosition().equals("e1")) {
 					ArrayList<Figure> temporaryFigures = new ArrayList<Figure>(Figures.figures);
 					for (Figure figure : temporaryFigures) {
 						if (figure.getPosition().equals("a1") && figure.getName().equals("Tower") && figure.getColor() == 1 && figure.moves == 0) {
 							if (!Figures.figuresPositionMap.contains("b1") && !Figures.figuresPositionMap.contains("c1") && !Figures.figuresPositionMap.contains("d1")) {
+								chosenFigure.possibleMoves.add("c1");
 								setCastling(true);
-								showDialog();
-								if (doThis) {
-									moveLongWhiteTower();
+								if (WhoseTurn.whiteTurn) {
+									showDialog();
+									if (doThis) {
+										moveLongWhiteTower();
+									}
 								}
 							}
 						} 
@@ -87,10 +97,13 @@ public class Castling extends JOptionPane {
 						for (Figure figure : temporaryFigures) {
 							if (figure.getPosition().equals("a8") && figure.getName().equals("Tower") && figure.getColor() == 2 && figure.moves == 0) {
 								if (!Figures.figuresPositionMap.contains("b8") && !Figures.figuresPositionMap.contains("c8") && !Figures.figuresPositionMap.contains("d8")) {
+									chosenFigure.possibleMoves.add("c8");
 									setCastling(true);
-									showDialog();
-									if (doThis) {
-										moveLongBlackTower();
+									if (WhoseTurn.blackTurn) {
+										showDialog();
+										if (doThis) {
+											moveLongBlackTower();
+										}
 									}
 								}
 							} 
@@ -101,8 +114,6 @@ public class Castling extends JOptionPane {
 					}			
 				}				
 	}
-	
-	
 // Moving Towers used in castling		
 	
 	private void moveLongBlackTower() {

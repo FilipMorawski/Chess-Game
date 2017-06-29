@@ -25,6 +25,7 @@ public class Courier extends Figure {
 	@Override
 	void setPossibleMoves() {
 		this.possibleMoves.clear();
+		this.range.clear();
 		int[] calculateHorizontalPositions = new int[28];		
 		int[] calculateVerticalPositions = new int[28]; 
 		ArrayList<Integer> horizontalPositions = new ArrayList<Integer>(); 
@@ -77,6 +78,7 @@ public class Courier extends Figure {
 		for (int k = 0; k <horizontalPositions.size(); k++) {
 			String move = Coordinates.horizontal[horizontalPositions.get(k)] + Coordinates.vertical[verticalPositions.get(k)]; 
 			this.possibleMoves.add(move); 
+			this.range.add(move);
 		}
 		this.possibleMoves = new AdjustCourierPossibleMoves(this.name, this.position, this.color, this.possibleMoves).possibleMoves;
 		

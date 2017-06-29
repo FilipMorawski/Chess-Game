@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 public class King extends Figure {
+	
+	private ArrayList<String> possibleAtackingRoutes;
 
 	public King( String name, int color, String position, int verticalID, int horizontalID){
 		this.name = name;
@@ -53,16 +55,23 @@ public class King extends Figure {
 			String move = Coordinates.horizontal[horizontalPositions.get(k)] + Coordinates.vertical[verticalPositions.get(k)]; 
 			this.possibleMoves.add(move); 
 		}
+		setAttackingRoutes();
+	}
+
+	private void setAttackingRoutes() {
+		this.possibleAtackingRoutes = new AttackingRoute(this).getPossibleAttackingRoute();
+	}		
 		
-// Adding castling moves		
-		if (this.color == 1 && this.position.equals("e1") && this.moves == 0) {
-			this.possibleMoves.add("g1");
-			this.possibleMoves.add("c1");
-		}
-		if (this.color == 2 && this.position.equals("e8") && this.moves == 0) {
-			this.possibleMoves.add("g8");
-			this.possibleMoves.add("c8");
-		}
+		
+//// Adding castling moves		
+//		if (this.color == 1 && this.position.equals("e1") && this.moves == 0) {
+//			this.possibleMoves.add("g1");
+//			this.possibleMoves.add("c1");
+//		}
+//		if (this.color == 2 && this.position.equals("e8") && this.moves == 0) {
+//			this.possibleMoves.add("g8");
+//			this.possibleMoves.add("c8");
+//		}
 		
 ////////////////////////////Testowy wydruk////////////////////////////	
 //		for (int f = 0; f<calculateHorizontalPositions.length; f++) {
@@ -72,7 +81,6 @@ public class King extends Figure {
 //		System.out.println("");
 //		System.out.println("");
 
-	}
 
 
 }

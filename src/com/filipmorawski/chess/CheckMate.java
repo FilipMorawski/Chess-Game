@@ -25,6 +25,7 @@ public class CheckMate {
 	public void check() {
 		
 		BlockPossibility block = new BlockPossibility();
+		check = false;
 		
 // Finding Kings on Map
 		for (Figure figure : Figures.figures) {
@@ -43,15 +44,13 @@ public class CheckMate {
 					allBlacksPossibleMoves.removeAll(figure.getPossibleMoves());
 				}
 			}
-		}
-		
+		}		
 
 		for (Figure black : blacks) {			
 //Removing own figures positions from possible Movement of blackKing			
 			if (blackKing.getPossibleMoves().contains(black.getPosition())) {
 				blackKing.possibleMoves.remove(black.getPosition());
 			}
-			
 			ArrayList<String> whPossibleMoves = new ArrayList<String>(whiteKing.getPossibleMoves());
 			for (String wkMove : whPossibleMoves) {
 				if (black.getPossibleMoves().contains(wkMove)) {
@@ -62,7 +61,6 @@ public class CheckMate {
 		
 		//checking if black king is in white movement zone		
 				for (Figure white : whites) {
-				
 					//Removing own figures positions from possible Movement of whiteKing			
 					if (whiteKing.getPossibleMoves().contains(white.getPosition())) {
 						whiteKing.possibleMoves.remove(white.getPosition());
@@ -81,41 +79,48 @@ public class CheckMate {
 			if (black.getPossibleMoves().contains(whiteKing.getPosition())) {
 				if (whiteKing.getPossibleMoves().isEmpty()) {
 					if (!allWhitesPossibleMoves.contains(black.getPosition())) {
-						if (!block.check(black, whiteKing, allWhitesPossibleMoves)) {
+						if (!block.blockCheck(black, whiteKing, allWhitesPossibleMoves)) {
 							JOptionPane.showMessageDialog(null, "CheckMate! - Black player wins", "CheckMate", JOptionPane.WARNING_MESSAGE);
-						} else {
+							check = true;
+						} else if (!check){
 							JOptionPane.showMessageDialog(null, "Check! - White King is in danger", "Check", JOptionPane.WARNING_MESSAGE);
-							whiteCheck = true;			
+							whiteCheck = true;		
+							check = true;
 						}
-					} else {
+					} else if (!check) {
 						JOptionPane.showMessageDialog(null, "Check! - White King is in danger", "Check", JOptionPane.WARNING_MESSAGE);
-						whiteCheck = true;											
+						whiteCheck = true;
+						check = true;
 					}
-				} else {
+				} else  if (!check){
 					JOptionPane.showMessageDialog(null, "Check! - White King is in danger", "Check", JOptionPane.WARNING_MESSAGE);
-					whiteCheck = true;					
+					whiteCheck = true;
+					check = true;
 				}
 			}
 		}
 		
-
 // Checking check and checkMate
 		for (Figure white : whites) {
 			if (white.getPossibleMoves().contains(blackKing.getPosition())) {
 				if (blackKing.getPossibleMoves().isEmpty()) {
 					if (!allBlacksPossibleMoves.contains(white.getPosition())) {
-						if (!block.check(white, blackKing, allBlacksPossibleMoves)) {
+						if (!block.blockCheck(white, blackKing, allBlacksPossibleMoves)) {
 						JOptionPane.showMessageDialog(null, "CheckMate! - White player wins", "CheckMate", JOptionPane.WARNING_MESSAGE);
-						} else {
+						check = true;
+						} else  if (!check){
 							JOptionPane.showMessageDialog(null, "Check! - Black King is in danger", "Check", JOptionPane.WARNING_MESSAGE);
-							whiteCheck = true;			
+							whiteCheck = true;
+							check = true;
 						}	
-					} else {
+					} else  if (!check){
 						JOptionPane.showMessageDialog(null, "Check! - Black King is in danger", "Check", JOptionPane.WARNING_MESSAGE);
+						check = true;
 					}
-				} else {
+				} else  if (!check){
 					JOptionPane.showMessageDialog(null, "Check! - Black King is in danger", "Check", JOptionPane.WARNING_MESSAGE);
 					blackCheck = true;
+					check = true;
 				}
 			} 
 /////////////////////////////////// TESTING PRINTS ///////////////////////////////////////

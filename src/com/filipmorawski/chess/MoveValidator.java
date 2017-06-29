@@ -1,5 +1,6 @@
 package com.filipmorawski.chess;
 
+import java.util.ArrayList;
 import java.util.Collections;
 
 import javax.swing.JOptionPane;
@@ -9,23 +10,42 @@ import javax.swing.JOptionPane;
 public class MoveValidator {
 
 	private Boolean moveVerification = true;
+	private Boolean dialog = false;
 	
 	public MoveValidator(Figure chosenFigure, FieldButton chosenButton) {
 		
 //Checking whose turn it is		
 		if (WhoseTurn.whiteTurn) {
 			if(!new WhoseTurn().whoseTurn(chosenFigure.getColor())) {
-				JOptionPane.showMessageDialog(null, "It's white turn!", "Wrong move", JOptionPane.WARNING_MESSAGE);
-				moveVerification = false;
+				if (!dialog) {
+					dialog = true;
+					JOptionPane.showMessageDialog(null, "It's white turn!", "Wrong move", JOptionPane.WARNING_MESSAGE);
+					moveVerification = false;
+				}
 			}
 		}
 		
 		if (WhoseTurn.blackTurn) {
 			if(new WhoseTurn().whoseTurn(chosenFigure.getColor())) {
-				JOptionPane.showMessageDialog(null, "It's black turn!", "Wrong move", JOptionPane.WARNING_MESSAGE);
-				moveVerification = false;
+				if (!dialog) {
+					dialog = true;
+					JOptionPane.showMessageDialog(null, "It's black turn!", "Wrong move", JOptionPane.WARNING_MESSAGE);
+					moveVerification = false;
+				}
 			}
 		}
+//Checking if figure you want to move is only the one who defending king from check
+		DefendingKing defend = new DefendingKing();
+		ArrayList<String> figuresDefendingKing = defend.isDefendingFigures();
+		if (figuresDefendingKing.contains(chosenFigure.getPosition())) {
+			if (!dialog) {
+				dialog = true;
+				moveVerification = false;
+				JOptionPane.showMessageDialog(null, "You cannot put this figure on this field!", "Wrong move", JOptionPane.WARNING_MESSAGE);
+			}
+		}
+		
+		
 		
 // Checking enPassant possibility and if, its do it
 			if (chosenFigure.getName().equals("Pawn")) {
@@ -46,8 +66,11 @@ public class MoveValidator {
 			if (chosenButton.buttonTitle == chosenFigure.position) {
 			moveVerification = false;
 			} else {
-				moveVerification = false;
-				JOptionPane.showMessageDialog(null, "You cannot put this figure on this field!", "Wrong move", JOptionPane.WARNING_MESSAGE);
+				if (!dialog) {
+					dialog = true;
+					moveVerification = false;
+					JOptionPane.showMessageDialog(null, "You cannot put this figure on this field!", "Wrong move", JOptionPane.WARNING_MESSAGE);
+				}
 			}
 		}
 		
@@ -55,8 +78,11 @@ public class MoveValidator {
 		if (chosenButton.getIsPiece()) {
 			if(chosenButton.figure.color == chosenFigure.color) {
 				if (chosenButton.buttonTitle != chosenFigure.position) {
-				moveVerification = false;
-				JOptionPane.showMessageDialog(null, "You cannot take your own figures!", "Wrong move", JOptionPane.WARNING_MESSAGE);
+					if (!dialog) {
+						dialog = true;
+						moveVerification = false;
+						JOptionPane.showMessageDialog(null, "You cannot take your own figures!", "Wrong move", JOptionPane.WARNING_MESSAGE);
+					}
 				}
 			} 
 		}  
