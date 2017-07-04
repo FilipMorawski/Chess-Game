@@ -38,8 +38,9 @@ public class Queen extends Figure {
 		
 		towerPossibleMoves = new Tower(this.name, this.color, this.position, this.verticalID, this.horizontalID).getPossibleMoves();
 		courierPossibleMoves = new Courier(this.name, this.color, this.position, this.verticalID, this.horizontalID).getPossibleMoves();
-		towerRange = new Tower(this.name, this.color, this.position, this.verticalID, this.horizontalID).getPossibleMoves();
-		courierRange = new Courier(this.name, this.color, this.position, this.verticalID, this.horizontalID).getPossibleMoves();
+		towerRange = new Tower(this.name, this.color, this.position, this.verticalID, this.horizontalID).getRange();
+		courierRange = new Courier(this.name, this.color, this.position, this.verticalID, this.horizontalID).getRange();
+
 
 		this.possibleMoves.addAll(towerPossibleMoves);
 		this.possibleMoves.addAll(courierPossibleMoves);

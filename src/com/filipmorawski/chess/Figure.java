@@ -178,4 +178,12 @@ public abstract class Figure {
 	public void setLastMoveCount(int lastMoveCount) {
 		this.lastMoveCount = lastMoveCount;
 	}
+
+	public ArrayList<String> getRange() {
+		return range;
+	}
+
+	public void setRange(ArrayList<String> range) {
+		this.range = range;
+	}
 }
