@@ -26,7 +26,9 @@ public class ButtonListener implements ActionListener {
 //			System.out.println(" Mo¿liwe ruchy  " +  chosenButton.figure.possibleMoves);
 //			System.out.println(" Pozycja to " +  chosenButton.figure.position);
 //			System.out.println("Ta figura wykona³a : " + chosenButton.getFigure().getMoves());
+//			System.out.println("Iloœæ wykonanych ruchów : " + MovesCount.movesCount);
 //			System.out.println("Czy jest szach? " + CheckMate.check);
+//			System.out.println(" Range of Figure " + chosenButton.getFigure().range);
 //		}
 ///////////////////////////////////////////////////////////		
 

@@ -126,7 +126,7 @@ public class Castling extends JOptionPane {
 						
 				FieldButton a8;
 				FieldButton d8;
-				for (FieldButton button : ChessBoard.buttonMap) {
+				for (FieldButton button : ButtonMap.map) {
 						if (button.getButtonTitle().equals("a8")) {
 						a8 = button;
 						a8.setIsPiece(false);
@@ -155,7 +155,7 @@ public class Castling extends JOptionPane {
 						
 				FieldButton a1;
 				FieldButton d1;
-				for (FieldButton button : ChessBoard.buttonMap) {
+				for (FieldButton button : ButtonMap.map) {
 						if (button.getButtonTitle().equals("a1")) {
 						a1 = button;
 						a1.setIsPiece(false);
@@ -183,7 +183,7 @@ public class Castling extends JOptionPane {
 						
 				FieldButton h8;
 				FieldButton f8;
-				for (FieldButton button : ChessBoard.buttonMap) {
+				for (FieldButton button : ButtonMap.map) {
 						if (button.getButtonTitle().equals("h8")) {
 						h8 = button;
 						h8.setIsPiece(false);
@@ -211,7 +211,7 @@ public class Castling extends JOptionPane {
 			
 				FieldButton h1;
 				FieldButton f1;
-				for (FieldButton button : ChessBoard.buttonMap) {
+				for (FieldButton button : ButtonMap.map) {
 						if (button.getButtonTitle().equals("h1")) {
 						h1 = button;
 						h1.setIsPiece(false);

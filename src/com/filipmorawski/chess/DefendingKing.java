@@ -34,7 +34,8 @@ public class DefendingKing {
 							allWhitesPositions.remove(figure.getPosition());
 							allWhitesPossibleMoves.removeAll(figure.getPossibleMoves());
 						}
-					}else {
+					}
+					if  (figure.getColor() == 2) {
 						blacks.add(figure);
 						allBlacksPositions.add(figure.getPosition());
 						allBlacksPossibleMoves.addAll(figure.getPossibleMoves());

@@ -221,6 +221,11 @@ public class BlockPossibility {
 			String move = Coordinates.horizontal[horizontal.get(i)] + Coordinates.vertical[vertical.get(i)];
 			atackingRoute.add(move);
 		}
+		
+///////////////////////////// TESTING PRINTS ///////////////////////		
+System.out.println("");
+System.out.println("Atacking Route " + atackingFigure.name + " " + atackingFigure.position + " " + atackingRoute);
+////////////////////////////////////////////////////////////////////
 
 		return atackingRoute;
 		

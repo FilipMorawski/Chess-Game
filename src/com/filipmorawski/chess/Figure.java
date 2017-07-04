@@ -1,5 +1,6 @@
 package com.filipmorawski.chess;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.swing.Icon;
@@ -9,7 +10,11 @@ import javax.swing.JOptionPane;
 
 // Class handles moving of figures and all Figures stuff
 
-public abstract class Figure {
+public abstract class Figure implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	int color; // 1 - white , 2-black
 	int verticalID;
 	int horizontalID;
@@ -41,6 +46,7 @@ public abstract class Figure {
 				 chosenButton.setFigure(chosenFigure);
 				 chosenButton.setIsPiece(true);
 				 chosenButton.setIcon(chosenButton.figure.icon);
+				 chosenButton.setDisabledIcon(chosenButton.figure.icon);
 				 chosenFigure.moves++;
 				 previousButton.setIsPiece(false);
 				 previousButton.figure = null;
@@ -67,6 +73,7 @@ public abstract class Figure {
 				 
 				 WhoseTurn.whiteTurn = !WhoseTurn.whiteTurn;
 				 WhoseTurn.blackTurn = !WhoseTurn.blackTurn;
+				 WhoseTurn.sendToServer = true;
 			 }
 		 }
 		 

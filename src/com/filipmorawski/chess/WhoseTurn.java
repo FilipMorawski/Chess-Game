@@ -4,6 +4,7 @@ package com.filipmorawski.chess;
 
 public class WhoseTurn {	
 	
+	public static Boolean sendToServer = false;
 	public static Boolean whiteTurn = true;
 	public static Boolean blackTurn = false;
 	

@@ -45,7 +45,7 @@ public class EnPassant {
 				Figures.figures.remove(figure);
 			}
 			
-			for(FieldButton button : ChessBoard.buttonMap) {
+			for(FieldButton button : ButtonMap.map) {
 				if (button.getButtonTitle().equals(firstLetter + 4)) {
 					button.setIsPiece(false);
 					button.figure = null;
@@ -65,7 +65,7 @@ public class EnPassant {
 				Figures.figures.remove(figure);
 			}
 			
-			for(FieldButton button : ChessBoard.buttonMap) {
+			for(FieldButton button : ButtonMap.map) {
 				if (button.getButtonTitle().equals(firstLetter + 5)) {
 					button.setIsPiece(false);
 					button.figure = null;

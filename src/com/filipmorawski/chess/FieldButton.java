@@ -1,6 +1,7 @@
 package com.filipmorawski.chess;
 
 import java.awt.Color;
+import java.io.Serializable;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -8,7 +9,7 @@ import javax.swing.JButton;
 
 // Handles all information about chess fields and creating starting setup of Pieces
 
-public class FieldButton extends JButton {
+public class FieldButton extends JButton implements Serializable{
 
 	String buttonTitle;
 	int verticalID;
@@ -38,7 +39,12 @@ public class FieldButton extends JButton {
 //////////////////////////////////////////////////////////////////		
 		
 		buttonTitle = this.getName();
-		setIcons();
+		
+// Added to compatible with networking		
+		if (MovesCount.movesCount == 0) {
+			setIcons();			
+		}
+/////////////////////////////////////////		
 		this.addActionListener(new ButtonListener());
 	}
 
@@ -52,12 +58,14 @@ public class FieldButton extends JButton {
 				this.icon = figure.getIcon();
 				this.setIsPiece(true);
 				this.setIcon(icon);
+				this.setDisabledIcon(icon);
 			} else if (this.getName().contains("1")){
 				this.figure = new King("King", 1, this.getName(), this.getVerticalID(), this.getHorizontalID());
 				Figures.figures.add(this.figure);
 				this.icon = figure.getIcon();
 				this.setIsPiece(true);
 				this.setIcon(icon);
+				this.setDisabledIcon(icon);
 			}
 		}	
 	//Queens	
@@ -68,12 +76,14 @@ public class FieldButton extends JButton {
 				this.icon = figure.getIcon();
 				this.setIsPiece(true);
 				this.setIcon(icon);
+				this.setDisabledIcon(icon);
 			} else if (this.getName().contains("1")){
 				this.figure = new Queen("Queen", 1, this.getName(), this.getVerticalID(), this.getHorizontalID());
 				Figures.figures.add(this.figure);
 				this.icon = figure.getIcon();
 				this.setIsPiece(true);
 				this.setIcon(icon);
+				this.setDisabledIcon(icon);
 			}
 		}
 	//Couriers	
@@ -84,12 +94,14 @@ public class FieldButton extends JButton {
 				this.icon = figure.getIcon();
 				this.setIsPiece(true);
 				this.setIcon(icon);
+				this.setDisabledIcon(icon);
 			} else if (this.getName().contains("1")){
 				this.figure = new Courier("Courier", 1, this.getName(), this.getVerticalID(), this.getHorizontalID());
 				Figures.figures.add(this.figure);
 				this.icon = figure.getIcon();
 				this.setIsPiece(true);
 				this.setIcon(icon);
+				this.setDisabledIcon(icon);
 			}
 
 		}
@@ -101,12 +113,14 @@ public class FieldButton extends JButton {
 				this.icon = figure.getIcon();
 				this.setIsPiece(true);
 				this.setIcon(icon);
+				this.setDisabledIcon(icon);
 			} else if (this.getName().contains("1")){
 				this.figure = new Jumper("Jumper",1, this.getName(), this.getVerticalID(), this.getHorizontalID());
 				Figures.figures.add(this.figure);
 				this.icon = figure.getIcon();
 				this.setIsPiece(true);
 				this.setIcon(icon);
+				this.setDisabledIcon(icon);
 			}
 		}
 		
@@ -118,12 +132,14 @@ public class FieldButton extends JButton {
 				this.icon = figure.getIcon();
 				this.setIsPiece(true);
 				this.setIcon(icon);
+				this.setDisabledIcon(icon);
 			} else if (this.getName().contains("1")){
 				this.figure = new Tower("Tower", 1, this.getName(), this.getVerticalID(), this.getHorizontalID());
 				Figures.figures.add(this.figure);
 				this.icon = figure.getIcon();
 				this.setIsPiece(true);
 				this.setIcon(icon);
+				this.setDisabledIcon(icon);
 				}
 		}
 	//pawns	
@@ -134,12 +150,14 @@ public class FieldButton extends JButton {
 				this.icon = figure.getIcon();
 				this.setIsPiece(true);
 				this.setIcon(icon);
+				this.setDisabledIcon(icon);
 			} else {
 				this.figure = new Pawn("Pawn", 1, this.getName(), this.getVerticalID(), this.getHorizontalID());
 				Figures.figures.add(this.figure);
 				this.icon = figure.getIcon();
 				this.setIsPiece(true);
 				this.setIcon(icon);
+				this.setDisabledIcon(icon);
 			}
 		}
 	}
