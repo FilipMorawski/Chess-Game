@@ -1,10 +1,15 @@
 package com.filipmorawski.chess;
 
+import java.io.Serializable;
 
 // This class handling url's to figures icons
 
-public class ChessPieces {
+public class ChessPieces implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static String whiteKing = "./src/com/filipmorawski/chess/whiteKing.png";
 	public static String whiteQueen = "./src/com/filipmorawski/chess/whiteQueen.png";
 	public static String whiteCourier = "./src/com/filipmorawski/chess/whiteCourier.png";

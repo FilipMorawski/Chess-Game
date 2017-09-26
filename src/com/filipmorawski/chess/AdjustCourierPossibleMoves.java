@@ -5,30 +5,30 @@ import java.util.Collections;
 
 public class AdjustCourierPossibleMoves extends AdjustPossibleMoves {
 
-	 public AdjustCourierPossibleMoves(String name, String position, int color, ArrayList<String> possibleMoves) {
-	    this.color = color;
-	    this.possibleMoves = possibleMoves;
-	    adjustMoves(name, position);
-	 }
+	public AdjustCourierPossibleMoves(String name, String position, int color, ArrayList<String> possibleMoves) {
+		this.color = color;
+		this.possibleMoves = possibleMoves;
+		adjustMoves(name, position);
+	}
 
-	 
-// Removes from Courier possible moves fields that are behind any figures in his path
+	// Removes from Courier possible moves fields after any obstacle in his potential way
+	
 	@Override
 	void adjustMoves(String name, String position) {
-		String secondLetter = position.substring(1,2);
+		String secondLetter = position.substring(1, 2);
 		int verticalPosition = Integer.parseInt(secondLetter);
-		
+
 		ArrayList<String> right = new ArrayList<String>();
 		ArrayList<String> upperRight = new ArrayList<String>();
 		ArrayList<String> bottomRight = new ArrayList<String>();
-		
-		ArrayList<String> left = new ArrayList<String>();			
+
+		ArrayList<String> left = new ArrayList<String>();
 		ArrayList<String> upperLeft = new ArrayList<String>();
 		ArrayList<String> bottomLeft = new ArrayList<String>();
-		
+
 		this.possibleMoves.add(position);
 		Collections.sort(this.possibleMoves);
-		
+
 		boolean rightSide = false;
 		for (String pos : possibleMoves) {
 			if (possibleMoves.contains(pos) && !rightSide) {
@@ -43,12 +43,12 @@ public class AdjustCourierPossibleMoves extends AdjustPossibleMoves {
 		}
 		this.possibleMoves.remove(position);
 		right.add(position);
-		
+
 		Collections.sort(right);
 		Collections.sort(left);
-				
+
 		for (String pos : left) {
-			String secondL = pos.substring(1,2);
+			String secondL = pos.substring(1, 2);
 			int vPos = Integer.parseInt(secondL);
 			if (vPos > verticalPosition) {
 				upperLeft.add(pos);
@@ -57,9 +57,9 @@ public class AdjustCourierPossibleMoves extends AdjustPossibleMoves {
 			}
 		}
 		bottomLeft.remove(position);
-		
+
 		for (String pos : right) {
-			String secondL = pos.substring(1,2);
+			String secondL = pos.substring(1, 2);
 			int vPos = Integer.parseInt(secondL);
 			if (vPos > verticalPosition) {
 				upperRight.add(pos);
@@ -68,7 +68,7 @@ public class AdjustCourierPossibleMoves extends AdjustPossibleMoves {
 			}
 		}
 		bottomRight.remove(position);
-		
+
 		Collections.reverse(bottomLeft);
 		Collections.reverse(upperLeft);
 
@@ -89,7 +89,7 @@ public class AdjustCourierPossibleMoves extends AdjustPossibleMoves {
 			if (Figures.figuresPositionMap.contains(lPos)) {
 				erase = true;
 			}
-		}	
+		}
 		erase = false;
 		for (String rPos : upperRight) {
 			if (erase) {
@@ -112,5 +112,3 @@ public class AdjustCourierPossibleMoves extends AdjustPossibleMoves {
 	}
 
 }
-
-

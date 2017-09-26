@@ -1,14 +1,13 @@
 package com.filipmorawski.chess;
 
 import java.util.ArrayList;
-
 import javax.swing.ImageIcon;
 
 public class King extends Figure {
-	
+
 	private ArrayList<String> possibleAtackingRoutes;
 
-	public King( String name, int color, String position, int verticalID, int horizontalID){
+	public King(String name, int color, String position, int verticalID, int horizontalID) {
 		this.name = name;
 		this.color = color;
 		this.position = position;
@@ -22,65 +21,55 @@ public class King extends Figure {
 		setPossibleMoves();
 	}
 
-	// Creates all possible moves in all possible directions, then cut positions away of border of ChessBoard
+	// Creates all possible moves in all possible directions, then cut positions
+	// away of border of ChessBoard
 	@Override
 	void setPossibleMoves() {
 		this.possibleMoves.clear();
-		int[] calculateHorizontalPositions = {this.horizontalID,   this.horizontalID, this.horizontalID + 1, this.horizontalID -1, this.horizontalID + 1, this.horizontalID + 1, this.horizontalID - 1, this.horizontalID - 1}; 
-		int[] calculateVerticalPositions = {this.verticalID + 1, this.verticalID - 1,     this.verticalID,      this.verticalID,     this.verticalID + 1,   this.verticalID - 1, this.verticalID + 1,   this.verticalID - 1}; 
-		ArrayList<Integer> horizontalPositions = new ArrayList<Integer>(); 
-		ArrayList<Integer> verticalPositions = new ArrayList<Integer>(); 
+		calculateMaximumRange();
+	}
 
-		for(int i = 0; i< calculateHorizontalPositions.length; i++ ) {
-			if (calculateHorizontalPositions[i] < 0 || calculateHorizontalPositions[i] > 7 ) {
-				calculateHorizontalPositions[i] = 100;
-				calculateVerticalPositions[i] = 100;
-			} else if (calculateVerticalPositions[i] < 0 || calculateVerticalPositions[i] > 7 ) {
-				calculateHorizontalPositions[i] = 100;
-				calculateVerticalPositions[i] = 100;	
+	private void calculateMaximumRange() {
+		int[] calculateHorizontalPositions = { this.horizontalID, this.horizontalID, this.horizontalID + 1,
+				this.horizontalID - 1, this.horizontalID + 1, this.horizontalID + 1, this.horizontalID - 1,
+				this.horizontalID - 1 };
+		int[] calculateVerticalPositions = { this.verticalID + 1, this.verticalID - 1, this.verticalID, this.verticalID,
+				this.verticalID + 1, this.verticalID - 1, this.verticalID + 1, this.verticalID - 1 };
+		removeOutOfMapPositions(calculateHorizontalPositions, calculateVerticalPositions);
+	}
+
+	private void removeOutOfMapPositions(int[] calculateHorizontalPositions, int[] calculateVerticalPositions) {
+		ArrayList<Integer> horizontalPositions = new ArrayList<Integer>();
+		ArrayList<Integer> verticalPositions = new ArrayList<Integer>();
+
+		for (int i = 0; i < calculateHorizontalPositions.length; i++) {
+			if (calculateHorizontalPositions[i] < 0 || calculateHorizontalPositions[i] > maxRangeInOneDirection) {
+				calculateHorizontalPositions[i] = outOfBoundFlag;
+				calculateVerticalPositions[i] = outOfBoundFlag;
+			} else if (calculateVerticalPositions[i] < 0 || calculateVerticalPositions[i] > maxRangeInOneDirection) {
+				calculateHorizontalPositions[i] = outOfBoundFlag;
+				calculateVerticalPositions[i] = outOfBoundFlag;
 			}
 		}
 		for (int position : calculateHorizontalPositions) {
-			if (position != 100) {
+			if (position != outOfBoundFlag) {
 				horizontalPositions.add(position);
 			}
 		}
 		for (int position : calculateVerticalPositions) {
-			if (position != 100) {
+			if (position != outOfBoundFlag) {
 				verticalPositions.add(position);
 			}
 		}
-		
-		for (int k = 0; k <horizontalPositions.size(); k++) {
-			String move = Coordinates.horizontal[horizontalPositions.get(k)] + Coordinates.vertical[verticalPositions.get(k)]; 
-			this.possibleMoves.add(move); 
-		}
-		setAttackingRoutes();
+		convertToStringPositions(horizontalPositions, verticalPositions);
 	}
 
-	private void setAttackingRoutes() {
-		this.possibleAtackingRoutes = new AttackingRoute(this).getPossibleAttackingRoute();
-	}		
-		
-		
-//// Adding castling moves		
-//		if (this.color == 1 && this.position.equals("e1") && this.moves == 0) {
-//			this.possibleMoves.add("g1");
-//			this.possibleMoves.add("c1");
-//		}
-//		if (this.color == 2 && this.position.equals("e8") && this.moves == 0) {
-//			this.possibleMoves.add("g8");
-//			this.possibleMoves.add("c8");
-//		}
-		
-////////////////////////////Testowy wydruk////////////////////////////	
-//		for (int f = 0; f<calculateHorizontalPositions.length; f++) {
-//			System.out.print(calculateHorizontalPositions[f] + ", ");
-//			System.out.print(calculateVerticalPositions[f] + ", ");
-//		}
-//		System.out.println("");
-//		System.out.println("");
-
-
-
+	private void convertToStringPositions(ArrayList<Integer> horizontalPositions,
+			ArrayList<Integer> verticalPositions) {
+		for (int k = 0; k < horizontalPositions.size(); k++) {
+			String move = Coordinates.horizontal[horizontalPositions.get(k)]
+					+ Coordinates.vertical[verticalPositions.get(k)];
+			this.possibleMoves.add(move);
+		}
+	}
 }

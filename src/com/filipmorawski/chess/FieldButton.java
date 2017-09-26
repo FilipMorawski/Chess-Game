@@ -1,25 +1,28 @@
 package com.filipmorawski.chess;
 
 import java.awt.Color;
+import java.io.Serializable;
 
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 // Handles all information about chess fields and creating starting setup of Pieces
 
-public class FieldButton extends JButton {
+public class FieldButton extends JButton implements Serializable{
 
-	String buttonTitle;
-	int verticalID;
-	int horizontalID;
-	Icon icon;
-	Boolean isPiece = false;
-	Color originalColor;
-	Figure figure = null;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String buttonTitle;
+	private int verticalID;
+	private int horizontalID;
+	private	Icon buttonIcon;
+	private Boolean isPiece = false;
+	private Color originalColor;
+	private Figure figure = null;
 	
 	
-//Constructors
 	public FieldButton(int verticalID, int horizontalID) {
 		this.verticalID = verticalID;
 		this.horizontalID = horizontalID;
@@ -31,122 +34,26 @@ public class FieldButton extends JButton {
 			this.setBackground(Color.LIGHT_GRAY);
 			this.originalColor = Color.LIGHT_GRAY;
 		}
-		this.setName(Coordinates.horizontal[horizontalID] + Coordinates.vertical[verticalID]);
+		this.setButtonTitle(Coordinates.horizontal[horizontalID] + Coordinates.vertical[verticalID]);
 		
 ///////////////////  Show Coordinates on Fields //////////////////
 //		this.setText(Coordinates.horizontal[horizontalID] + Coordinates.vertical[verticalID]);
 //////////////////////////////////////////////////////////////////		
 		
-		buttonTitle = this.getName();
-		setIcons();
+		if (MovesCount.movesCount == 0) {
+			setIcons();			
+		}	
 		this.addActionListener(new ButtonListener());
 	}
 
-// Methods
 	private void setIcons() {
-	//Kings	
-		if (this.getName().contains("e")) {
-			if (this.getName().contains("8")) {
-				this.figure = new King("King", 2, this.getName(), this.getVerticalID(), this.getHorizontalID());
-				Figures.figures.add(this.figure);
-				this.icon = figure.getIcon();
-				this.setIsPiece(true);
-				this.setIcon(icon);
-			} else if (this.getName().contains("1")){
-				this.figure = new King("King", 1, this.getName(), this.getVerticalID(), this.getHorizontalID());
-				Figures.figures.add(this.figure);
-				this.icon = figure.getIcon();
-				this.setIsPiece(true);
-				this.setIcon(icon);
-			}
-		}	
-	//Queens	
-		if (this.getName().contains("d")) {
-			if (this.getName().contains("8")) {
-				this.figure = new Queen("Queen", 2, this.getName(), this.getVerticalID(), this.getHorizontalID());
-				Figures.figures.add(this.figure);
-				this.icon = figure.getIcon();
-				this.setIsPiece(true);
-				this.setIcon(icon);
-			} else if (this.getName().contains("1")){
-				this.figure = new Queen("Queen", 1, this.getName(), this.getVerticalID(), this.getHorizontalID());
-				Figures.figures.add(this.figure);
-				this.icon = figure.getIcon();
-				this.setIsPiece(true);
-				this.setIcon(icon);
-			}
-		}
-	//Couriers	
-		if (this.getName().contains("f") || this.getName().contains("c")) {
-			if (this.getName().contains("8")) {
-				this.figure = new Courier("Courier", 2, this.getName(), this.getVerticalID(), this.getHorizontalID());
-				Figures.figures.add(this.figure);
-				this.icon = figure.getIcon();
-				this.setIsPiece(true);
-				this.setIcon(icon);
-			} else if (this.getName().contains("1")){
-				this.figure = new Courier("Courier", 1, this.getName(), this.getVerticalID(), this.getHorizontalID());
-				Figures.figures.add(this.figure);
-				this.icon = figure.getIcon();
-				this.setIsPiece(true);
-				this.setIcon(icon);
-			}
-
-		}
-	//Jumpers	
-		if (this.getName().contains("g") || this.getName().contains("b")) {
-			if (this.getName().contains("8")) {
-				this.figure = new Jumper("Jumper", 2, this.getName(), this.getVerticalID(), this.getHorizontalID());
-				Figures.figures.add(this.figure);
-				this.icon = figure.getIcon();
-				this.setIsPiece(true);
-				this.setIcon(icon);
-			} else if (this.getName().contains("1")){
-				this.figure = new Jumper("Jumper",1, this.getName(), this.getVerticalID(), this.getHorizontalID());
-				Figures.figures.add(this.figure);
-				this.icon = figure.getIcon();
-				this.setIsPiece(true);
-				this.setIcon(icon);
-			}
-		}
-		
-	//towers	
-		if (this.getName().contains("h") || this.getName().contains("a")) {
-			if (this.getName().contains("8")) {
-				this.figure = new Tower("Tower", 2, this.getName(), this.getVerticalID(), this.getHorizontalID());
-				Figures.figures.add(this.figure);
-				this.icon = figure.getIcon();
-				this.setIsPiece(true);
-				this.setIcon(icon);
-			} else if (this.getName().contains("1")){
-				this.figure = new Tower("Tower", 1, this.getName(), this.getVerticalID(), this.getHorizontalID());
-				Figures.figures.add(this.figure);
-				this.icon = figure.getIcon();
-				this.setIsPiece(true);
-				this.setIcon(icon);
-				}
-		}
-	//pawns	
-		if (this.getName().contains("2") || this.getName().contains("7") ) {
-			if (this.getName().contains("7")) {
-				this.figure = new Pawn("Pawn", 2, this.getName(), this.getVerticalID(), this.getHorizontalID());
-				Figures.figures.add(this.figure);
-				this.icon = figure.getIcon();
-				this.setIsPiece(true);
-				this.setIcon(icon);
-			} else {
-				this.figure = new Pawn("Pawn", 1, this.getName(), this.getVerticalID(), this.getHorizontalID());
-				Figures.figures.add(this.figure);
-				this.icon = figure.getIcon();
-				this.setIsPiece(true);
-				this.setIcon(icon);
-			}
-		}
+		new StartingFiguresLayout(this).setLayout();
 	}
 
-//Getters and Setters
-
-
+	public void setButtonTitle(String string) {
+		this.buttonTitle = string;	
+	}
+	
 	public String getButtonTitle() {
 		return buttonTitle;
 	}
@@ -159,24 +66,12 @@ public class FieldButton extends JButton {
 		return horizontalID;
 	}
 
-	public void setButtonTitle(String buttonTitle) {
-		this.buttonTitle = buttonTitle;
-	}
-
 	public void setVerticalID(int verticalID) {
 		this.verticalID = verticalID;
 	}
 
 	public void setHorizontalID(int horizontalID) {
 		this.horizontalID = horizontalID;
-	}
-
-	public Icon getIcon() {
-		return icon;
-	}
-
-	public void setIcon(Icon icon) {
-		this.icon = icon;
 	}
 
 	public Boolean getIsPiece() {
@@ -201,6 +96,14 @@ public class FieldButton extends JButton {
 
 	public void setFigure(Figure figure) {
 		this.figure = figure;
+	}
+
+	public Icon getButtonIcon() {
+		return buttonIcon;
+	}
+
+	public void setButtonIcon(Icon buttonIcon) {
+		this.buttonIcon = buttonIcon;
 	}
 
 
