@@ -1,9 +1,0 @@
-4.Mo¿liwoœc ruchu w³asnej figury w taki sposób, ¿e powoduje szachowanie w³asnego króla (ods³oniecie figury atakuj¹cej),
-5.Ogólnie b³edy wynikaj¹ z analizy jedynie figur szachuj¹cych przy sprawdzaniu szach mata,
-
-
-1 - Okreœlony range wszystkich figur.
-2 - Klikniêcie na swoj¹ figurê powoduje sprawdzenie iloœci przypadków w których jedyna figura os³ania króla wzglêdem koloru rpzeciwnego - 
-Jeœli król jest w range jakieœ figury, wykorzystuje block mechanism do okreœlenia pól pomiêdzy ni¹ a królem, i jeœli tylko jedna figura blokuje, dodaje jej pozycje do listy.
-3 - sprawdza czy wybrana pozycja znajduje siê na liœcie takich przypadków
-4 - jeœli tak nie pozwala na ruch t¹ figur¹
