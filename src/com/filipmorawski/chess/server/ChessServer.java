@@ -10,13 +10,12 @@ public class ChessServer {
 	private ArrayList<Thread> threads = new ArrayList<Thread>();
 	private ArrayList<Socket> connectedClients = new ArrayList<Socket>();
 	private ArrayList<ObjectOutputStream> outStreams = new ArrayList<ObjectOutputStream>();
-	private ArrayList<String> avaibleColours = new ArrayList<String>(); 
+	private ArrayList<String> avaibleColours = new ArrayList<String>();
 	private boolean start;
-	
-	public static void main(String[] args) {
-		new ChessServer().createServer();	
-	}
 
+	public static void main(String[] args) {
+		new ChessServer().createServer();
+	}
 
 	public void createServer() {
 		try {
@@ -24,35 +23,35 @@ public class ChessServer {
 			System.out.println("server is ready");
 			avaibleColours.add("White");
 			avaibleColours.add("Black");
-			
+
 			while (connectedClients.size() < 2) {
 				try {
 					Socket clientSocket = serverSocket.accept();
 					connectedClients.add(clientSocket);
 					System.out.println("Client Connected!");
-					
+
 					ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream());
 					outStreams.add(out);
 
 					if (connectedClients.size() == 2) {
 						start = true;
 					}
-					
-					Thread sendStartingData = new Thread(new ConnectionData(clientSocket, outStreams, avaibleColours, start));
-//					avaibleColours.remove(0);
+
+					Thread sendStartingData = new Thread(
+							new ConnectionData(clientSocket, outStreams, avaibleColours, start));
 					sendStartingData.start();
-					
+
 					Thread clientsService = new Thread(new HandlingClients(clientSocket, outStreams));
 					threads.add(clientsService);
 					clientsService.start();
-					
+
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-			}		
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 }

@@ -18,10 +18,10 @@ public class Figures implements Serializable {
 
 	public static ArrayList<String> createMap() {
 		ArrayList<String> figuresPositionMap = new ArrayList<String>();
-		for (Figure figure : figures ) {
+		for (Figure figure : figures) {
 			String position = figure.getPosition();
 			figuresPositionMap.add(position);
 		}
 		return figuresPositionMap;
-	} 
+	}
 }

@@ -6,7 +6,7 @@ import javax.swing.JTextArea;
 
 public class MessageReceivedDialog extends JFrame{
 
-	public JTextArea centralArea;
+	private JTextArea centralArea;
 	
 	public MessageReceivedDialog() {
 		this.setTitle("Messages from server");

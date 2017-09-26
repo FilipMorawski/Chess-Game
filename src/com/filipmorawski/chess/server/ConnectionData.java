@@ -5,15 +5,16 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 
-public class ConnectionData implements Runnable{
+public class ConnectionData implements Runnable {
 
 	private Socket clientSocket;
-	private ObjectOutputStream oos; 
+	private ObjectOutputStream oos;
 	private ArrayList<ObjectOutputStream> outStreams;
 	private ArrayList<String> avaibleColours;
 	private boolean start;
-	
-	public ConnectionData(Socket clientSocket, ArrayList<ObjectOutputStream> outStreams, ArrayList<String> avaibleColours, boolean start) {
+
+	public ConnectionData(Socket clientSocket, ArrayList<ObjectOutputStream> outStreams,
+			ArrayList<String> avaibleColours, boolean start) {
 		this.clientSocket = clientSocket;
 		this.outStreams = outStreams;
 		this.start = start;
@@ -29,7 +30,7 @@ public class ConnectionData implements Runnable{
 				oos.writeObject(start);
 				oos.flush();
 			}
-		}catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}

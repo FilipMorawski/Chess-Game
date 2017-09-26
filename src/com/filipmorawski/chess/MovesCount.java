@@ -13,7 +13,5 @@ public class MovesCount {
 	public static void setMovesCount(int movesCount) {
 		MovesCount.movesCount = movesCount;
 	}
-	
-	
-	
+
 }
